@@ -1,15 +1,16 @@
+require('dotenv').config();
 const path = require('path');
 const express = require('express');
 const http = require('http');
 const socketio = require('socket.io');
 const {addUser, getUser, getUsersInRoom, removeUser} = require('./utils/users');
 const app = express();
-
+const {genrateMessages } = require('./utils/message');
 const server = http.createServer(app);
 const io = socketio(server);
-const {genrateMessages } = require('./utils/message');
 
-const port = process.env.port || 3000;
+
+let port = process.env.PORT || 3000;
 const publicDirectoryPath = path.join(__dirname, '../public');
 
 app.use(express.static(publicDirectoryPath));
